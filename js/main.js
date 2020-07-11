@@ -1,14 +1,26 @@
-// Написать функцию map, которая будет принимать в качестве
-// аргумента массив arr и функцию, которая в свою очередь будет
-// осуществлять преобразование массива arr  в вид
-// [ "<li class="list-group-item">Tom</li>", ....]
-// и выводить элементы массива в ul с id="list"
-// Вывод должен осуществляться в отсортированном по алфавиту виде
-
-let arr = ["Tom", "Steve", "Bill", "Rita", "Pete", "Ashley"];
+let arr = ["Tom", "StEve", "bill sckot", "Rita", "Pete EvaNs", "Ashley"];
 const list = document.getElementById("list");
 
-// Сигнатура map
-function map(list, fn) {
-  // todo
+function sortArray(arr) {
+  let newArr = arr.map((item) => item.toLowerCase());
+
+  newArr.sort();
+
+  newArr.forEach((item) => {
+    if (list) {
+      let li = document.createElement("li");
+      li.classList.add("list-group-item");
+      let content = item
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+      li.innerText = content.join(" ");
+      list.appendChild(li);
+    }
+  });
 }
+
+function map(arr, fn) {
+  fn(arr);
+}
+
+map(arr, sortArray);
